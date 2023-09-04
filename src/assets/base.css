@@ -1,0 +1,87 @@
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ffffff
+  }
+  to {
+    text-shadow: 0 0 40px #ffffff
+  }
+}
+body{
+  background-color: #230e21;
+  font-family: 'Montserrat', sans-serif;
+  color: #e4ffff;
+ 
+  overflow: hidden;
+  
+}
+.title {
+  margin: 0%;
+  /*margin-right: 10%;*/
+  z-index: 80;
+  display: inline;
+  animation: glow 5s ease-in-out infinite alternate;
+}
+
+.headerIconBox {
+
+  display: inline-flex;
+  position: fixed;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 15%;
+  height: auto;
+  margin:auto;
+  top: 0%;
+  left: 47%;
+  margin-left: -100px;
+}
+
+.headIcon {
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 0px;
+  padding: 2px;
+  margin: 3px;
+  transition: 0.2s;
+  transition-timing-function: ease-out;
+  border-radius: 5%;
+  height: 50%;
+  filter: opacity(.5);
+  
+
+}
+
+
+/** .headicons fade to white when hovered over */
+.headIcon:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 30%;
+  box-shadow: 0 0 8px white;
+  filter: opacity(1);
+}
+.infoLink{
+  transition: 0.5; 
+}
+
+.infoLink:link {
+  color: rgb(120, 255, 120) ;
+}
+
+/* visited link */
+.infoLink:visited {
+  color: rgb(120, 255, 120) ;
+}
+
+/* mouse over link */
+.infoLink:hover {
+  color: rgb(210, 255, 210) ;
+  
+}
+
+/* selected link */
+.infoLink:active {
+  color: rgb(120, 255, 120) ;
+}
+
+

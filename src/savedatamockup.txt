@@ -1,0 +1,26 @@
+[[pjn]]"project name"
+[[ach]]"_R_"{
+    "start journey"{1/(50/30)
+    }/
+    "middle story"{1/(100/30)}/
+    "end story"{1/(150/30)}}/
+"start journey"{
+    "father dies"{0/(50/20)}}
+
+[[pjn]] = ProJect Name
+[[ach]] = All CHarts
+[f] = ther
+_R_ = root chart name
+{} = lists
+() = coords
+[[]] = categories
+/ = list seperator
+"" = things the user typed
+
+
+box save data format = {"box text"{containts its own chart?/ location on screen / {connected box 1 / connected box 2} }}
+
+
+
+
+parsing
