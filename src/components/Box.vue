@@ -1,7 +1,7 @@
 <template>
-    <div :style="this.cStyle"
+    <div 
      class="chart-box" ref ="draggableContainer"  
-     @mousedown="dragMouseDown " @mousemove="dragging" @mouseup="boxDrop" >
+     @mousedown="dragMouseDown " @mousemove="dragging" @mouseup="boxDrop" :style="isSelected() ? this.cStyle : this.sStyle">
         <input v-if="this.editingMode_box"  class="chart-boxContents"  v-model="this.boxText">
         <p v-else class="chart-boxContents">{{ this.boxText }}</p>
 
@@ -60,8 +60,12 @@ export default {
         pickupTime: 0,
         boxText:"",
         cStyle: {
-            boxShadow: "0px 0px 10px" + " #fff0ff" //dropColor()
-        }
+            boxShadow: "0px 0px 10px " + "#8e6e91" //dropColor()
+        },
+        sStyle:
+        {
+            boxShadow: "0px 0px 15px " + "#ffffff" //dropColor()
+        },
         }
     },
     mounted(){
@@ -94,11 +98,11 @@ export default {
             console.log("mouse up");
         },
         dropColor(){
-            let dc = "#8e6e91"
+            dc = "#8e6e91"
             if (this.selectedID == this.boxID){
-                dc="fff0ff"
+                dc="#fff0ff"
             }
-            dc = "0px 0px 10px " + dc
+
             console.log(dc)
             return {dc}
         },
@@ -106,6 +110,11 @@ export default {
             let activity = (this.selectedID == this.boxID && this.editingMode_box);
             return { activity }
         },
+        isSelected() {
+            let activity = (this.selectedID == this.boxID);
+            return { activity }
+
+        }
     }
 
 };

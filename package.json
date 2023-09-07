@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "draggable-panel": "^1.0.10",
+    "hotkeys-js": "^3.12.0",
     "vue": "^3.2.41",
     "vue-keypress": "^2.1.2",
+    "vue-use-hotkeys": "^0.4.0",
+    "vue3-hotkey": "^1.0.3",
     "vue3-keypress": "^4.0.1"
   },
   "devDependencies": {
