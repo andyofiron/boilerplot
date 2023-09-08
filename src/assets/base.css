@@ -7,7 +7,7 @@
   }
 }
 body{
-  background-color: #140512;
+  background-color: #230e21;
   font-family: 'Montserrat', sans-serif;
   color: #e4ffff;
  
@@ -33,7 +33,7 @@ body{
   width: 15%;
   height: auto;
   margin:auto;
-  top: 0%;
+  top: 1%;
   left: 47%;
   margin-left: -100px;
 }

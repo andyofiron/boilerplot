@@ -1,9 +1,10 @@
 <template> 
-    <div class="flowChart" v-for="card in chartData"  >
-        <Box @sbx = "selectBox"
+    <div ref="fc" class="flowChart"   >
+        <Box v-for="card in chartData" @sbx = "selectBox"
         :editingMode_box="editingMode_chart" 
         :selectedID="selectedID" 
         :boxID="card.boxID" 
+        :ref="this.boxID"
         :holdsChart="card.holdsChart" 
         :screenLocation="card.location" 
         :savedboxText="card.boxText">

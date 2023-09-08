@@ -10,19 +10,18 @@
     <head class="title">
       <!-- title at top left -->
       <img width=30 src="./assets/logo.png">
-      <h1 class="title">boilerplot</h1>
+      <h1 v-if="!debugEnabled" class="title">boilerplot</h1>
+      <h1 v-else class="title">boilerdebug</h1>
       <div class="headerIconBox">
         <!-- this is all of the icons at the top of the page -->
 
         <button @click="isOpen = !isOpen" title="Info" class="headIcon"><img :height=iconHeight
             src="./assets/icons/information.png"></button>
         <button title="File" class="headIcon"><img :height=iconHeight src="./assets/icons/shape_move_back.png"></button>
-        <button @keyup.e="addbox" @click="addBox" title="Create - E" class="headIcon"><img :height=iconHeight
+        <button @keyup.e="addbox" @click="addBox" title="Create - Q" class="headIcon"><img :height=iconHeight
             src="./assets/icons/add.png"></button>
-        <button title="Focus/Unfocus - Alt" class="headIcon"><img :height=iconHeight
-            src="./assets/icons/application.png"></button>
         <button @click="editingMethod" title="Mode Change - F1" class="headIcon"><img :height=iconHeight
-            src="./assets/icons/pencil.png"></button>
+            src="./assets/icons/application.png"></button>
         <button title="Out Box - [" class="headIcon"><img :height=iconHeight src="./assets/icons/arrow_out.png"></button>
         <button title="In Box - ]" class="headIcon"><img :height=iconHeight src="./assets/icons/arrow_in.png"></button>
 
@@ -32,8 +31,9 @@
 
 
     <body>
-      <h2>root chart <span style="font-size: small; color: rebeccapurple; ">{{ fancierEditModeDisplay() }}, selection:
+      <h2>root chart <span v-if="debugEnabled" style="font-size: small; color: rgb(158, 130, 184); ">{{ fancierEditModeDisplay() }}, selection:
           {{ this.selectedBox }}</span></h2>
+      <div><img v-if="!editingMode" :height=iconHeight src="./assets/icons/application.png"><img v-else :height=iconHeight src="./assets/icons/pencil.png"></div>
       <Infobox :open="isOpen" @close="isOpen = !isOpen">
         <h2>
           about boilerplot - v0.0.1
@@ -50,15 +50,9 @@
           each of those acts can have their own flowchart and so on. <br />
           <br />
           it is a work in progress, and is currently in pre-alpha, or before functionality. <br />
-          <br />
-          the current icons are the silk icons by famfamfam,<br />
-          which is licensed under a Creative Commons Attribution 2.5 License.<br />
-          the icons are available <a target="_blank" class="infoLink"
-            href="http://www.famfamfam.com/lab/icons/silk/">here!</a><br />
         </p>
         <div class="infoCredits">
           <h3><img width=20 src="./assets/icons/vue.png"> powered by vue.js!</h3>
-          <h3><img width=20 src="./assets/icons/information.png "> silk icons from famfamfam</h3>
         </div>
 
       </Infobox>
@@ -66,7 +60,7 @@
 
 
     </body>
-    <Chart @chart_sbx="selectBox" :editingMode_chart="this.editingMode" :selectedID="selectedBox" :isRoot=true
+    <Chart @chart_sbx="selectBox" ref="thechart" :editingMode_chart="this.editingMode" :selectedID="selectedBox" :isRoot=true
       :chartData="saveData.charts[currentChart]"> </Chart>
 
 
@@ -103,6 +97,7 @@ export default {
       currentID: 2,
       currentChart: "_R_",
       editingMode: false, //0 = selection, 1 = editing
+      debugEnabled: false,
       testBox: "<h1>big text??</h1>"
     }
   },
@@ -122,19 +117,31 @@ export default {
     genericWorking() {
       console.warn("IT WORKS!!!!!");
     },
+    modeIcon(){
+      if (this.editingMode === true) {
+        return "./assets/icons/application.png"
+      }
+      else
+      {
+        return "./assets/icons/pencil.png"
+      }
+    },
     handleKeyDown(key) {
       if (key.keyCode === 112) {
         this.editingMethod();
       }
-      else if (key.keyCode === 69 && !this.editingMode) {
+      else if (key.keyCode === 81 && !this.editingMode) {
         this.addBox();
+      }
+      else if (key.keyCode === 57 && !this.editingMode) {
+        this.debugEnabled = !this.debugEnabled;
       }
       // arrow handler
       if (key.keyCode === 37) {
         this.arrowScroll(-1)
       }
       else if (key.keyCode === 38) {
-        cthis.arrowScroll("Upper")
+        this.arrowScroll("Upper")
       }
       else if (key.keyCode === 39) {
         this.arrowScroll(1)
@@ -159,6 +166,7 @@ export default {
           this.selectedBox = this.saveData.charts[this.currentChart].length - 1;
         }
       }
+      console.log(this.$refs.thechart.$refs.fc.$refs[this.selectedBox.toString()].$refs.draggableContainer.$refs.inputbox );
 
     },
     fancierEditModeDisplay(isEditing) {
